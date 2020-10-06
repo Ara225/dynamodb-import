@@ -1,0 +1,30 @@
+{
+  "name": "dynamodb-import",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "bin": {
+    "dynamodb-import": "index.js"
+  },
+  "keywords": [
+    "dynamodb",
+    "aws",
+    "json",
+    "import"
+  ],
+  "author": "Anna Aitchison",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ara225/dynamodb-json-import.git"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.766.0",
+    "dynamodb-data-types": "^3.0.1",
+    "yargs": "^16.0.3"
+  }
+}

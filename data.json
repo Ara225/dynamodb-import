@@ -1,0 +1,13 @@
+[
+    {
+        "password": "d5e3abb3ea1b28acfe5af276a8f941c6a2154afa4050a43f9f37585778dc39ea",
+        "gender": "male",
+        "familyName": "lastName2",
+        "givenName": "Bob",
+        "name": "Bob lastName2",
+        "telephone": "01614960408",
+        "id": 80,
+        "birthDate": "6/25/1943",
+        "email": "bob.lastname2@example.com"
+    }
+]
