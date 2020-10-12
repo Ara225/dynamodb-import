@@ -1,4 +1,4 @@
-# dynamodb-json-import
+# dynamodb-import
 A simple module to import JSON files into DynamoDB. Works at the CLI or as an imported module.
 
 ## CLI Usage
