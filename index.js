@@ -1,9 +1,10 @@
+#!/usr/bin/env node
 // Load the AWS SDK for Node.js
 const AWS = require('aws-sdk');
 const attr = require('dynamodb-data-types').AttributeValue;
 const {argv} = require('yargs')
 
-function importToDynamoDB(data, tableName, regionName, maxBatchSize, endpoint) {
+async function importToDynamoDB(data, tableName, regionName, maxBatchSize, endpoint) {
     if (!data || !tableName || !regionName) {
         throw Error("Missing required arguments to importToDynamoDB function. See readme");
     }
@@ -12,6 +13,7 @@ function importToDynamoDB(data, tableName, regionName, maxBatchSize, endpoint) {
     }
     // Set the region
     AWS.config.update({ region: regionName });
+    console.log("DynamoDB import started");
     // Create DynamoDB service object
     if (endpoint) {
         var ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10', endpoint: endpoint });
@@ -21,6 +23,7 @@ function importToDynamoDB(data, tableName, regionName, maxBatchSize, endpoint) {
     }
     let items = [];
     for (let index = 0; index < data.length; index++) {
+        console.log("Processing item " + index.toString());
         const element = data[index];
         // Format element in the correct format for DynamoDB's API 
         let item = {
@@ -36,15 +39,19 @@ function importToDynamoDB(data, tableName, regionName, maxBatchSize, endpoint) {
                 }
             };
             params["RequestItems"][tableName] = items;
+            console.log(params)
             // Async function call to write the items to the DB 
-            ddb.batchWriteItem(params, function (err, data) {
-                if (err) {
-                    console.log("Error happened while attempting to batch write items.");
-                    throw err;
-
-                } else {
-                    console.log("Success", data);
-                }
+            await new Promise((resolve, reject) => {
+                ddb.batchWriteItem(params, function (err, data) {
+                    if (err) {
+                        console.log("Error happened while attempting to batch write items.");
+                        reject(err);
+    
+                    } else {
+                        console.log("Success", data);
+                        resolve(data)
+                    }
+                });
             });
             items = [];
         }

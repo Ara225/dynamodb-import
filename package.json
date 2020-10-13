@@ -1,7 +1,7 @@
 {
   "name": "dynamodb-import",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "A node module to import JSON arrays into DynamoDB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
